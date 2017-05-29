@@ -1,0 +1,57 @@
+<div class=" jumbotron bg">
+
+   <div class=" form-group container">
+     <label class="text-align">Enter your Movie!!</label>
+  <input [(ngModel)]="value" placeholder="movie Name" class="form-control"/><br>
+   <div >
+  <button  (click)="onTestGet(value)" class="btn btn-danger">Search!</button></div>
+  </div>
+  
+  
+  <div class="container"
+            infinite-scroll
+            debounce
+            [infiniteScrollDistance]="scrolldistance"
+            [infiniteScrollThrottle]="throttle"
+            (scrolled)="onScroll(value,page)">
+            
+        
+
+  
+    <md-card id="card" *ngFor='let re of getData'>
+      
+     <div class="row">
+       <div class="col-md-6">
+    
+    <img src="https://image.tmdb.org/t/p/w500{{re.poster_path}}" alt="image" class="img-align">
+    
+       </div>
+       <div class="col-md-6">
+         
+    <md-card-title class="panel panel-default">Title: {{re.title}}<button class="glyphicon glyphicon-star pull-right" (click)=pushData(re.title,re.poster_path,re.popularity,re.overview,re.original_language,re.genre_ids)></button></md-card-title><br>
+    <md-card-title>Language: {{re.original_language}}</md-card-title><br>
+    <md-card-title>Popularity: {{re.popularity}}</md-card-title><br>
+    <md-card-title >
+      genre:{{pushGenre(re.genre_ids)}}
+    </md-card-title>
+    <br>
+    <md-card-title class="well">Overview: {{re.overview}}</md-card-title><br>
+    <md-card-title>Total pages:{{total_results}}</md-card-title><br>
+
+
+       </div>
+     </div>
+     
+    </md-card>
+    <div *ngIf="MovieArray">
+     <div *ngFor='let temp of MovieArray'>
+      <md-card-title class="panel panel-default">Title: {{temp.a}}</md-card-title><br>
+    <md-card-title>Language: {{temp.a}}</md-card-title><br>
+    <md-card-title>image: <img src="https://image.tmdb.org/t/p/w500{{temp.b}}" alt="image" ></md-card-title><br> 
+    <md-card-title>Popularity: {{temp.c}}</md-card-title><br>
+    <md-card-title>Overview: {{temp.d}}</md-card-title><br> 
+     </div>
+     </div>
+  
+  </div>
+ </div>
