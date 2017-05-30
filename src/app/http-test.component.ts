@@ -20,8 +20,9 @@ export class HTTPTestComponent {
     moviename:string;
     MovieArray=[];
     scrolldistance=50000;
-    throttle=2;
+    throttle=20;
     page=1;
+    totalpage:number;
     
 
    
@@ -31,7 +32,9 @@ export class HTTPTestComponent {
     {
         this.httpservice.getcurrentData(value)
         .subscribe(
-            data=>this.getData=data.results,
+            data=>{this.getData=data.results;
+                  this.totalpage=data.total_pages;
+          },
             error=>alert(error),
             ()=>console.log("finished")
       );
@@ -64,7 +67,8 @@ pushGenre(x){
 return genreArray;
 }
 onScroll (value,page) {
-  this.httpservice.page++;
+  if(this.httpservice.page<this.totalpage){
+      this.httpservice.page++;
         console.log('scrolled!!');
          this.httpservice.getcurrentData(value)
         .subscribe(
@@ -77,4 +81,5 @@ onScroll (value,page) {
       );
         
     }
+}
  }
