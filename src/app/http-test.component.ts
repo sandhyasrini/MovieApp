@@ -5,7 +5,8 @@ import {movieDetails} from './movie-details'
 import {genre} from './genre-main'
 import {genres} from './genre-list'
 import {favoriteComponent} from './app.favorite';
-import {GenreService} from './genre.service'
+import {GenreService} from './genre.service';
+
 
 @Component({
   selector: 'http-test',
@@ -20,8 +21,8 @@ export class HTTPTestComponent {
     value:string;
     moviename:string;
     MovieArray=[];
-    scrolldistance=80000;
-    throttle=20;
+    scrolldistance=8000;
+    throttle=500;
     page=1;
     totalpage:number;
     genreNew=[];
@@ -63,7 +64,7 @@ export class HTTPTestComponent {
     
    pushData(a,b,c,d,e,f){
      let obj={a,b,c,d,e,f}
-     this._fav.MovieArrayFav.push(obj);
+     this.MovieArray.push(obj);
   
     /* this._fav.pushVal(a,b,c,d,e,f);
      
@@ -85,9 +86,10 @@ pushGenre(x){
 return genreArray;
 }
 onScroll (value) {
+  console.log(this.totalpage);
   if(this.httpservice.page<=this.totalpage){
       this.httpservice.page++;
-        console.log('scrolled!!');
+        console.log('scrolled!!'+this.httpservice.page);
          this.httpservice.getcurrentData(value)
         .subscribe(
             // data=>{this.getData.push(data.results),console.log(this.getData)},

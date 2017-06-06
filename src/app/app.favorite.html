@@ -1,0 +1,62 @@
+
+  
+   <div class="bgbody jumbotron" >
+     <h3 class="fav">My Favorites</h3>
+     <div class="container">
+     <div *ngIf='this.favservice.MovieArray'>
+     <div *ngFor='let re of this.favservice.MovieArray'>
+     <div class="row jumbotron">
+
+       <div class="col-md-12">
+        <div class="panel panel-default">Title: {{re.title}}<button class="glyphicon glyphicon-trash pull-right pull-class" (click)=DeleteVal(re.id)></button></div>
+       </div>
+       <div class="col-md-6">
+    
+    <div *ngIf="re.poster_path===null;then content else other_content"></div>
+
+<ng-template #content><img src="https://image.tmdb.org/t/p/w500/9Qv2Q4597YQ9rWPrE8Jm171GWEL.jpg" alt="image" class="img-align"></ng-template>
+<ng-template #other_content><img src="https://image.tmdb.org/t/p/w500{{re.poster_path}}" alt="image" class="img-align"></ng-template>
+    
+    
+       </div>
+       <div class="col-md-6">
+        <div class="row">
+        <h3> <span class="label label-info">Language</span></h3> 
+         <p style="font-size:18px;">{{re.original_language}}</p>
+        </div> 
+        <div class="row">
+        <h3> <span class="label label-info">Id</span></h3> 
+         <p style="font-size:18px;">{{re.id}}</p>
+        </div> 
+        <div class="row">
+         <h3><span class="label label-info">Popularity</span></h3> 
+         <p style="font-size:18px;">{{re.popularity}}</p>
+         </div> 
+          <div class="row">
+<div class="panel-group">
+          <div class="panel panel-default">
+            <div class="panel-heading">
+              <h4 class="panel-title">
+                <a data-toggle="collapse" href="#collapse{{index}}">Overview</a><button (click)="change()" tooltip content="click to edit overview" class="glyphicon glyphicon-pencil pull-right">
+                            </button>
+              </h4>
+            </div>
+            <div id="collapse{{index}}" class=" panel-primary panel-body movie-overview">
+            <textarea [(ngModel)]="re.overview" class="form-control" [disabled]="butDisabled">{{re.overview}}</textarea>
+            
+            <div>
+<button  (click)="onPut(re.id,re.title,re.overview,re.release_date,re.original_language,re.popularity,re.poster_path)" class="btn btn-danger pull-right">Modify!</button>
+            </div>
+            </div>
+        </div>
+  </div>
+          </div> 
+          
+       </div>
+       <div class="col-md-12" style="margin-top:10px;">
+     </div>
+     </div>
+     </div>
+     </div>
+     </div>
+   </div>

@@ -3,6 +3,10 @@ import { Component } from '@angular/core';
 import {Directive } from '@angular/core'
 import {HTTPTestComponent} from './http-test.component'
 
+
+
+
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -11,4 +15,5 @@ import {HTTPTestComponent} from './http-test.component'
 })
 export class AppComponent {
   title = 'Movie App!';
+  
 }

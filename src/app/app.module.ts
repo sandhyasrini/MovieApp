@@ -7,9 +7,12 @@ import { InfiniteScrollModule } from 'angular2-infinite-scroll';
 import {RouterModule} from '@angular/router';
 import { MdButtonModule, MdCardModule, MdMenuModule, MdToolbarModule, MdIconModule, MdInputModule} from '@angular/material';
 import {favoriteComponent} from './app.favorite'
+import {FavoriteService} from './app.favorite.service'
 import { AppComponent } from './app.component';
 import { HTTPTestComponent } from './http-test.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations'
+import {ToolTipModule} from 'angular2-tooltip'
+
 
 @NgModule({
   declarations: [
@@ -27,9 +30,12 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations'
     MdToolbarModule,
     MdIconModule,
     MdInputModule,
+    ToolTipModule,
     InfiniteScrollModule,
     BrowserAnimationsModule,
-    RouterModule.forRoot([{
+    RouterModule.forRoot([
+     { path: '', redirectTo: '/movie', pathMatch: 'full'},
+      {
       path:'movie',
       component:HTTPTestComponent
     },
@@ -41,7 +47,7 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations'
     ])
 
   ],
-  providers: [],
+  providers: [FavoriteService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

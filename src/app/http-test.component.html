@@ -1,11 +1,12 @@
 <div class=" jumbotron bg">
 
-   <div class=" form-group container">
+   <div class=" form-group container" (keyup.enter)="onTestGet(value)">
      
      <label class="text-align">Enter your Movie!!</label>
+     <div class="wrapper">
   <input [(ngModel)]="value" placeholder="movie Name" class="form-control" /><br>
-   <div >
-  <button  (click)="onTestGet(value)" class="btn btn-danger">Search!</button></div>
+   
+  <button  (click)="onTestGet(value)" (keyup.enter)="onTestGet(value)"  class="btn btn-danger">Search!</button></div>
     
   </div>
   
@@ -25,11 +26,16 @@
      <div class="row">
 
        <div class="col-md-12">
-        <md-card-title class="panel panel-default">Title: {{re.title}}<button class="glyphicon glyphicon-star pull-right" (click)=pushData(re.title,re.poster_path,re.popularity,re.overview,re.original_language,re.genre_ids)></button></md-card-title>
+        <md-card-title class="panel panel-default">Title: {{re.title}}<button class="glyphicon glyphicon-star pull-right" tooltip content="add to favorites" (click)=this._fav.postValue(re.id,re.title,re.overview,re.release_date,re.original_language,re.popularity,re.poster_path)></button></md-card-title>
        </div>
        <div class="col-md-6">
+
     
-    <img src="https://image.tmdb.org/t/p/w500{{re.poster_path}}" alt="image" class="img-align">
+
+     <div *ngIf="re.poster_path===null;then content else other_content">here is ignored</div>
+
+<ng-template #content><img src="https://image.tmdb.org/t/p/w500/9Qv2Q4597YQ9rWPrE8Jm171GWEL.jpg" alt="image" class="img-align"></ng-template>
+<ng-template #other_content><img src="https://image.tmdb.org/t/p/w500{{re.poster_path}}" alt="image" class="img-align"></ng-template>
     
        </div>
        <div class="col-md-6">
